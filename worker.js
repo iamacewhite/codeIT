@@ -19,16 +19,21 @@ var worker=function(){
 			var obj=JSON.parse(msg);
 			var url="";
 			url=url.concat("http://cis2016-exchange",obj.exchange,".herokuapp.com/api/orders");
-			var options = {
-			  uri: url,
-			  method: 'POST',
-			  json: {
-			  	"team_uid":config.token,
+			
+            var action = {
+			  	"team_uid":teamUID,
 			  	"symbol":obj.symbol,
 			  	"side":obj.side,
 			  	"qty":obj.qty,
 			  	"order_type":obj.order_type
-			  }
+			  };
+			if(obj.order_type=="limit")
+				action.price=obj.price;
+			
+			var options = {
+			  uri: url,
+			  method: 'POST',
+			  json: action
 			};
 
 			request(options, function (error, response, body) {
