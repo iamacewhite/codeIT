@@ -45,6 +45,6 @@ var insertToDB = function(entry) {
   */
 };
 
-
+insertToDB({"time":147262494723131,"message":{"symbol":"0001","price":33.45}});
 
 module.exports = insertToDB;
