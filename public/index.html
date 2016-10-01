@@ -12,15 +12,42 @@
     <!-- AngularFire -->
     <script src="https://cdn.firebase.com/libs/angularfire/1.2.0/angularfire.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
 </head>
 <body ng-app="tradingDisplayApp" ng-controller="tradingDisplayController">
 <script src="js/main.js"></script>
 
 <div class="container-fluid">
-    <h1>Display of every single order</h1>
-    <div ng-repeat="tran in recentTrans">
-        <h5>{{tran.time}} {{tran.orderType}} {{tran.ticker}} {{tran.price | number:2}} {{tran.qty}} {{tran.side}} {{tran.status}}</h5>
-    </div>
+    <table class="highlight">
+        <thead>
+        <tr>
+            <th>Time</th>
+            <th>Order Type</th>
+            <th>Ticker</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Side</th>
+            <th>Status</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="tran in recentTrans">
+            <td>{{tran.time}}</td>
+            <td>{{tran.orderType}}</td>
+            <td>{{tran.ticker}}</td>
+            <td>{{tran.price | number:2}}</td>
+            <td>{{tran.qty}}</td>
+            <td>{{tran.side}}</td>
+            <td>{{tran.status}}</td>
+        </tr>
+        </tbody>
+    </table>
 </div>
 
 

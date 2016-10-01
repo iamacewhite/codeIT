@@ -19,7 +19,18 @@ app.controller("tradingDisplayController", ["$scope", "$firebaseArray",
         $scope.$watch("filteredMessages",function(oldValue,newValue){
             for(var i=0; i<10; ++i){
                 $scope.recentTrans[i] = {};
-                $scope.recentTrans[i].time = $scope.filteredMessages[9-i].fr;
+
+                var date = new Date($scope.filteredMessages[9-i].fr);
+                var hours = String(date.getHours());
+                console.log(hours);
+                if (hours.length === 1){
+                    hours = '0'+ hours;
+                }
+                var minutes = "0" + date.getMinutes();
+                var seconds = "0" + date.getSeconds();
+                var formattedTime = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
+
+                $scope.recentTrans[i].time = formattedTime;
                 $scope.recentTrans[i].orderType = $scope.filteredMessages[9-i].message.order_type;
                 $scope.recentTrans[i].price = $scope.filteredMessages[9-i].message.price;
                 $scope.recentTrans[i].qty = $scope.filteredMessages[9-i].message.qty;
