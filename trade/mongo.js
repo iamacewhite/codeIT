@@ -8,29 +8,8 @@ var mongoClient = require('mongodb').MongoClient;
 
 //Include redis modules
 var rsmq = config.rsmq;
+var insertToDB = require("./helpers");
 
-
-function insertToDB(entry) {
-    mongoClient.connect(config.mongo.uri, function (err, db) {
-        if (err) {
-            console.log('an error');
-        } else {
-            console.log('no error');
-            console.log(db);
-            db.collection('executionHistory').insertOne(entry, function (err, result) {
-                if (!err) {
-                    console.log(result);
-                    console.log('A trading history entry has been inserted.')
-                }
-            });
-            db.collection('executionHistory').find({}).toArray(function (err, result) {
-                if(!err){
-                    console.log(result);
-                }
-            });
-        }
-    });
-}
 
 
 /*
@@ -80,18 +59,25 @@ function insertToDB(entry) {
  });
  */
 
-rsmq.receiveMessage({qname: config.q2name}, function (err, resp) {
+var mongo = function() {
+  rsmq.receiveMessage({
+    qname: config.q2name
+  }, function(err, resp) {
     if (!err) {
-        console.log("Message received.", resp);
-        insertToDB(resp);
-        rsmq.deleteMessage({qname: config.q2name, id: resp.id}, function (err, resp) {
-            if (resp === 1) {
-                console.log("Message" + resp.id + "deleted.");
-            }
-            else {
-                console.log("Message not found.")
-            }
-        });
+      console.log("Message received.", resp);
+      insertToDB(resp);
+      rsmq.deleteMessage({
+        qname: config.q2name,
+        id: resp.id
+      }, function(err, resp) {
+        if (resp === 1) {
+          console.log("Message" + resp.id + "deleted.");
+        } else {
+          console.log("Message not found.")
+        }
+      });
     }
-});
-
+  });
+}
+// mongo();
+module.exports = mongo;

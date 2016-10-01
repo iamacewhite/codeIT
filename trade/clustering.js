@@ -1,23 +1,13 @@
 var cluster = require('cluster');
-var http = require('http');
 var RSMQWorker = require( "rsmq-worker" );
 var worker = new RSMQWorker( "myqueue" );
-
 var cluster = require('cluster');
 var numCPUs = require('os').cpus().length;
-var RedisSMQ = require("rsmq");
 var config = require("../config");
-var rsmq = new RedisSMQ( {host: config.IP, port: config.port, ns: config.ns} );
-rsmq.createQueue({qname:config.}, function (err, resp) {
-        if (resp===1) {
-            console.log("queue created")
-        }
-        rsmq.createQueue({qname:"myqueue"}, function (err, resp) {
-                if (resp===1) {
-                    console.log("queue created")
-                }
-        });
-});
+var master = require("./master");
+var worker = require("./worker");
+var mongo = require("./mongo");
+
 if (cluster.isMaster) {
   // Fork workers.
   for (var i = 0; i < numCPUs; i++) {
@@ -31,15 +21,24 @@ if (cluster.isMaster) {
   cluster.on('exit', function(worker, code, signal) {
     console.log('worker ' + worker.process.pid + ' died');
   });
+  setInterval(function() {
+    master();
+  }, 100)
 }
 
 else if (cluster.worker.id == 1) {
   console.log("I am mongo worker " + cluster.worker.id);
+  setInterval(function() {
+    mongo();
+  }, 100)
 }
 
 
 else {
   console.log("I am slave worker " + cluster.worker.id);
+  setInterval(function() {
+    worker();
+  }, 100)
   // worker.on( "message", function( msg, next, id ){
   //   // process your message
   //   console.log("Message id : " + id);
