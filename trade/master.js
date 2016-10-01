@@ -65,7 +65,11 @@ var master = function() {
           },
           function(error, response, body) {
             if (!error && body != null){
-              callback(null, JSON.parse(body));
+              try{
+                callback(null, JSON.parse(body));
+              } catch(err){
+                return;
+              }
             }
           });
       },
@@ -76,7 +80,12 @@ var master = function() {
           },
           function(error, response, body) {
             if (!error && body != null){
-              callback(null, JSON.parse(body));
+              try{
+                callback(null, JSON.parse(body));
+              } catch(err){
+                return;
+              }
+            }
             }
           });
       },
@@ -87,7 +96,12 @@ var master = function() {
           },
           function(error, response, body) {
             if (!error && body != null){
-              callback(null, JSON.parse(body));
+              try{
+                callback(null, JSON.parse(body));
+              } catch(err){
+                return;
+              }
+            }
             }
           });
       }
