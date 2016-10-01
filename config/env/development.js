@@ -15,6 +15,6 @@
    q1name: "trade",
    q2name: "db",
    q3name: "del",
-   master_frequency: 500,
-   worker_frequency: 100
+   master_frequency: 600,
+   worker_frequency: 300
  };

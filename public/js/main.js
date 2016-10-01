@@ -4,6 +4,7 @@
 
 var app = angular.module("tradingDisplayApp", ["firebase"]);
 
+/*
 app.controller("tradingDisplayController", function($scope, $firebaseObject) {
     // Initialize Firebase
     var config = {
@@ -35,4 +36,19 @@ app.controller("tradingDisplayController", function($scope, $firebaseObject) {
         console.log("new array length is " + newValue.length);
     }, true);
 */
-});
+//});
+
+
+app.controller("tradingDisplayController", ["$scope", "$firebaseArray",
+    function($scope, $firebaseArray) {
+        var messagesRef = new Firebase("https://codeit-suisse-team-ace.firebaseio.com/server/testing/transactionHistory");
+        // download the data from a Firebase reference into a (pseudo read-only) array
+        // all server changes are applied in realtime
+        $scope.messages = $firebaseArray(messagesRef);
+
+        var query = messagesRef.orderByChild("fr").limitToLast(25);
+
+        $scope.filteredMessages = $firebaseArray(query);
+
+    }
+]);

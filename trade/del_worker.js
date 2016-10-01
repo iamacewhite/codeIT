@@ -8,16 +8,16 @@ var del_worker = function() {
       qname: config.q3name
     }, function(err, resp) {
       if (resp.id) {
-        console.log("Message received.", resp);
+        // console.log("Message received.", resp);
         var msg = resp.message;
         rsmq.deleteMessage({
           qname: config.q3name,
           id: resp.id
         }, function(err, resp) {
           if (resp === 1) {
-            console.log("Message deleted.")
+            // console.log("Message deleted.")
           } else {
-            console.log("Message not found.")
+            // console.log("Message not found.")
           }
         });
         var obj = JSON.parse(msg);
@@ -32,7 +32,7 @@ var del_worker = function() {
         var past = new Date(obj.time);
         if (obj.side == "buy") {
           var exec_time = (1000 - (now - past)) >= 0 ? 1000 - (now - past) : 0;
-          console.log(exec_time);
+          // console.log(exec_time);
           setTimeout(function() {
             request(options, function(error, response, body) {
               if (!error && response.statusCode == 200) {
@@ -42,7 +42,7 @@ var del_worker = function() {
           }, exec_time);
         } else {
           var exec_time = (1000 - (now - past)) >= 0 ? 1000 - (now - past) : 0;
-          console.log(exec_time);
+          // console.log(exec_time);
           setTimeout(function() {
             request(options, function(error, response, body) {
               if (!error && response.statusCode == 200) {
@@ -50,11 +50,10 @@ var del_worker = function() {
                 obj.action.price = obj.action.price - delta;
                 rsmq.sendMessage({
                   qname: config.q1name,
-                  message: JSON.stringify(obj.action)
+                  message: JSON.stringify({buyaction:{}, sellaction: obj.action})
                 }, function(err, resp) {
-                  console.log(err);
                   if (resp) {
-                    console.log("Message sent. ID:", resp);
+                    // console.log("Message sent. ID:", resp);
                   }
                 });
               }
