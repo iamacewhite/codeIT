@@ -97,14 +97,3 @@ rsmq.receiveMessage({qname: config.rsmq.q2name}, function (err, resp) {
         });
     }
 });
-
-
-//RESTful API to let front-end query me
-app.post('/queryFromDB', function (req, res) {
-    res.status('200').send({"message": "result will be unvieled later"});
-});
-
-app.listen(3000, function () {
-    console.log('Running on localhost:3000');
-});
-

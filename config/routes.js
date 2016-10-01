@@ -5,7 +5,7 @@
  */
 
 const home = require('../app/controllers/home');
-
+const queryFromDB = require('../app/controllers/queryFromDB');
 /**
  * Expose
  */
@@ -13,7 +13,8 @@ const home = require('../app/controllers/home');
 module.exports = function (app, passport) {
 
   app.get('/', home.index);
-
+  //RESTful API to let front-end query me
+  app.post('/queryFromDB', queryFromDB.db);
   /**
    * Error handling
    */
