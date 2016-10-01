@@ -2,16 +2,18 @@ var request = require('request');
 var async = require('async');
 var config = require('./config');
 var RedisSMQ = require("rsmq");
-var rsmq = new RedisSMQ( {host: config.IP, port: config.port, ns: config.ns} );
+var rsmq = new RedisSMQ( {host: config.rsmq.IP, port: config.rsmq.port, ns: config.rsmq.ns} );
 
 
 var res = [];
 
 function action(actions){
+	console.log("checkpoint");
 	rsmq.sendMessage({qname:config.rsmq.q1name, message: actions},function(err, resp){
+		console.log(err);
 	    if (resp) {
 	        console.log("Message sent. ID:", resp);
-	    }		
+	    }
 	});
 }
 
@@ -45,13 +47,14 @@ async.parallel([
 	}],
 	function(err,result){
 		res = result;
+		console.log(res);
 		//strategy goes here
 		var actions = {
 			symbol: "0001",
 			side: "buy",
 			qty: 100,
 			order_type: "market",
-			exchange_id: 1
+			exchange: 1
 		};
 		action(JSON.stringify(actions));
 	});

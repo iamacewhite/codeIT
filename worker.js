@@ -1,7 +1,7 @@
 var config = require("./config");
 var RedisSMQ = require("rsmq");
 var request = require('request');
-var worker = function() {
+var worker = (function() {
 
   rsmq = new RedisSMQ({
     host: config.rsmq.IP,
@@ -24,12 +24,13 @@ var worker = function() {
           console.log("Message not found.")
         }
       });
+			console.log("checkpoint");
       var obj = JSON.parse(msg);
       var url = "";
       url = url.concat("http://cis2016-exchange", obj.exchange, ".herokuapp.com/api/orders");
 
       var action = {
-        "team_uid": teamUID,
+        "team_uid": config.token,
         "symbol": obj.symbol,
         "side": obj.side,
         "qty": obj.qty,
@@ -43,13 +44,15 @@ var worker = function() {
         method: 'POST',
         json: action
       };
-
+      console.log("begin request");
       request(options, function(error, response, body) {
+				console.log(body);
         if (!error && response.statusCode == 200) {
           rsmq.sendMessage({
             qname: config.rsmq.q2name,
-            message: body
+            message: JSON.stringify(body)
           }, function(err, resp) {
+						console.log(err);
             if (resp) {
               console.log("Message sent. ID:", resp);
             }
@@ -61,5 +64,4 @@ var worker = function() {
       console.log("No messages for me...");
     }
   });
-};
-module.exports = worker;
+})();
