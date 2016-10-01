@@ -39,15 +39,20 @@ app.controller("tradingDisplayController", ["$scope", "$firebaseArray","$interva
             }
         }, true);
 
-        /*
-        var itv = $interval(function () {
-            $http.get('http://cis2016-dashboard.herokuapp.com/').then(function(res){
-                console.log(res);
-                console.log(typeof(res));
-            },
-                function(err){console.log(err)});
-        }, 3000);
-        */
-    }
+
+        var itv = $interval($http({
+            method: 'GET',
+            url: 'http://cis2016-dashboard.herokuapp.com/api/teams',
+            headers: {"Host":"cis2016-dashboard.herokuapp.com",    "cache-control": "no-cache",
+                "postman-token": "1b57b4ca-ce0f-7290-8a96-d6f47d34850d"}
+        }).then(function successCallback(response) {
+            console.log(response);
+        }, function errorCallback(response) {
+            // called asynchronously if an error occurs
+            // or server returns response with an error status.
+        }), 3000);
+
+
+}
 
 ]);
