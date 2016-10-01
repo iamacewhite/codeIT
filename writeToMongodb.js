@@ -25,13 +25,15 @@ function insertToDB(entry) {
             console.log('an error');
         } else {
             console.log('no error');
-            db.createCollection('executionHistory', function (err, collection) {
                 db.collection('executionHistory').insertOne(entry, function (err, result) {
+                    if(!err){
+                        console.log(result);
+                        console.log('A trading history entry has been inserted.')
+                    }
                 });
                 collection.find({}).toArray(function (err, result) {
                     console.log(result);
                 });
-            });
         }
     });
 }
