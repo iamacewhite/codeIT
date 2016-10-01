@@ -7,14 +7,14 @@ var quantity = 10; //can be put into config
 
 var master = function() {
   function action(actions) {
-    console.log("checkpoint");
+    //console.log("checkpoint");
     rsmq.sendMessage({
       qname: config.q1name,
       message: actions
     }, function(err, resp) {
-      console.log(err);
+      //console.log(err);
       if (resp) {
-        console.log("Message sent. ID:", resp);
+        //console.log("Message sent. ID:", resp);
       }
     });
   }
@@ -38,19 +38,20 @@ var master = function() {
           side: "buy",
           qty: quantity,
           order_type: "limit",
-          price: minAsk + delta * 0.1;
-          exchange: buyIn;
+          price: minAsk + delta * 0.1,
+          exchange: buyIn
         };
-        action(JSON.stringify(buyaction));
+        
         var sellaction = {
           symbol: res[sellOut][i].symbol,
           side: "sell",
           qty: quantity,
           order_type: "limit",
-          price: maxBid - delta * 0.1;
-          exchange: sellOut;
+          price: maxBid - delta * 0.1,
+          exchange: sellOut
         };
-        action(JSON.stringify(sellaction));
+        actions = [JSON.stringify(buyaction), JSON.stringify(sellaction)];
+        action(actions);
       }
     }
   }
@@ -63,7 +64,9 @@ var master = function() {
             method: "GET"
           },
           function(error, response, body) {
-            callback(null, JSON.parse(body));
+            if (!error && body != null){
+              callback(null, JSON.parse(body));
+            }
           });
       },
       function(callback) {
@@ -72,7 +75,9 @@ var master = function() {
             method: "GET"
           },
           function(error, response, body) {
-            callback(null, JSON.parse(body));
+            if (!error && body != null){
+              callback(null, JSON.parse(body));
+            }
           });
       },
       function(callback) {
@@ -81,12 +86,14 @@ var master = function() {
             method: "GET"
           },
           function(error, response, body) {
-            callback(null, JSON.parse(body));
+            if (!error && body != null){
+              callback(null, JSON.parse(body));
+            }
           });
       }
     ],
     function(err, result) {
-      console.log(result);
+      ////console.log(result);
       //strategy goes here
       // var actions = {
       //   symbol: "0001",

@@ -14,6 +14,7 @@
    rsmq: rsmq,
    q1name: "trade",
    q2name: "db",
-   master_frequency: 10,
+   q3name: "del",
+   master_frequency: 100,
    worker_frequency: 100
  };
