@@ -21,18 +21,22 @@ var worker = function() {
         });
         //console.log("checkpoint");
         var obj = JSON.parse(msg);
-        var url = "";
-        url = url.concat("http://cis2016-exchange", obj.exchange, ".herokuapp.com/api/orders");
+        var obj0 = obj[0];
+        var obj1 = obj[1];
+
+
+        var url0 = "";
+        url0 = url0.concat("http://cis2016-exchange", obj0.exchange, ".herokuapp.com/api/orders");
 
         var action = {
           "team_uid": config.token,
-          "symbol": obj.symbol,
-          "side": obj.side,
-          "qty": obj.qty,
-          "order_type": obj.order_type
+          "symbol": obj0.symbol,
+          "side": "buy",
+          "qty": obj0.qty,
+          "order_type": obj0.order_type
         };
-        if (obj.order_type == "limit")
-          action.price = obj.price;
+        if (obj0.order_type == "limit")
+          action.price = obj0.price;
 
         var options = {
           uri: url,
@@ -44,12 +48,11 @@ var worker = function() {
         request(options, function(error, response, body) {
           //console.log(body);
           if (!error && response.statusCode == 200) {
-            if (obj.side == "buy") {
               rsmq.sendMessage({
                 qname: config.q3name,
                 message: JSON.stringify({
                   id: body.id,
-                  side: obj.side,
+                  side: "buy",
                   time: time
                 })
               }, function(err, resp) {
@@ -67,13 +70,40 @@ var worker = function() {
                   }
                 });
               });
-            } else {
+          }
+        });
+
+
+
+        var url1 = "";
+        url1 = url1.concat("http://cis2016-exchange", obj1.exchange, ".herokuapp.com/api/orders");
+
+        var action = {
+          "team_uid": config.token,
+          "symbol": obj1.symbol,
+          "side": "sell",
+          "qty": obj1.qty,
+          "order_type": obj1.order_type
+        };
+        if (obj1.order_type == "limit")
+          action.price = obj1.price;
+
+        var options = {
+          uri: url,
+          method: 'POST',
+          json: action
+        };
+        //console.log("begin request");
+        var time = new Date();
+        request(options, function(error, response, body) {
+          //console.log(body);
+          if (!error && response.statusCode == 200) {
               rsmq.sendMessage({
                 qname: config.q3name,
                 message: JSON.stringify({
                   action: action,
                   id: body.id,
-                  side: obj.side,
+                  side: "sell",
                   time: time
                 })
               }, function(err, resp) {
@@ -91,9 +121,9 @@ var worker = function() {
                   }
                 });
               });
-            }
           }
         });
+
 
       } else {
         //console.log("No messages for me...");
