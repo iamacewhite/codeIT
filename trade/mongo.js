@@ -10,7 +10,22 @@ var mongoClient = require('mongodb').MongoClient;
 var rsmq = config.rsmq;
 var insertToDB = require("./helpers");
 
+//Firebase
+var Firebase = require("firebase");
+var firebase = require("firebase");
+var path = require("path");
 
+
+firebase.initializeApp({
+    serviceAccount: path.resolve(__dirname, './codeit-suisse-team-ace-1e09ffc96f62.json'),
+    databaseURL: "https://codeit-suisse-team-ace.firebaseio.com/"
+});
+
+
+var db = firebase.database();
+var ref = db.ref("server/testing");
+var usersRef = ref.child("transactions");
+usersRef.set({"price":4.55});
 
 /*
  function queryFromMongodb(criteria) {
