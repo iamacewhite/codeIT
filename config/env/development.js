@@ -12,7 +12,9 @@
    rsmq: {
      IP: "127.0.0.1",
      port: 6379,
-     ns: "rsmq"
+     ns: "rsmq",
+     q1name: "trade",
+     q2name: "db"
    },
    facebook: {
      clientID: 'APP_ID',
