@@ -17,8 +17,11 @@ var usersRef = ref.child("transactionHistory");
 
 
 var insertToDB = function(entry) {
-    entry.message = JSON.parse(entry.message);
-    usersRef.push().set(entry);
+    if(entry.message){
+        entry.message = JSON.parse(entry.message);
+        usersRef.push().set(entry);
+    }
+
 /*
   mongoClient.connect(config.mongo.uri, function(err, db) {
     if (err) {
