@@ -1,21 +1,16 @@
-var config = require("./config");
-var RedisSMQ = require("rsmq");
+var config = require("../config");
 var request = require('request');
 var worker = (function() {
 
-  rsmq = new RedisSMQ({
-    host: config.rsmq.IP,
-    port: config.rsmq.port,
-    ns: config.rsmq.ns
-  });
+  var rsmq = config.rsmq;
   rsmq.receiveMessage({
-    qname: config.rsmq.q1name
+    qname: config.q1name
   }, function(err, resp) {
     if (resp.id) {
       console.log("Message received.", resp);
       var msg = resp.message;
       rsmq.deleteMessage({
-        qname: config.rsmq.q1name,
+        qname: config.q1name,
         id: resp.id
       }, function(err, resp) {
         if (resp === 1) {
@@ -49,7 +44,7 @@ var worker = (function() {
 				console.log(body);
         if (!error && response.statusCode == 200) {
           rsmq.sendMessage({
-            qname: config.rsmq.q2name,
+            qname: config.q2name,
             message: JSON.stringify(body)
           }, function(err, resp) {
 						console.log(err);

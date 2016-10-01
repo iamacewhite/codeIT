@@ -6,7 +6,7 @@ var worker = new RSMQWorker( "myqueue" );
 var cluster = require('cluster');
 var numCPUs = require('os').cpus().length;
 var RedisSMQ = require("rsmq");
-var config = require("./config");
+var config = require("../config");
 var rsmq = new RedisSMQ( {host: config.IP, port: config.port, ns: config.ns} );
 rsmq.createQueue({qname:config.}, function (err, resp) {
         if (resp===1) {

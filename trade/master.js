@@ -1,15 +1,14 @@
 var request = require('request');
 var async = require('async');
-var config = require('./config');
-var RedisSMQ = require("rsmq");
-var rsmq = new RedisSMQ( {host: config.rsmq.IP, port: config.rsmq.port, ns: config.rsmq.ns} );
+var config = require('../config');
+var rsmq = config.rsmq;
 
 
 var res = [];
 
 function action(actions){
 	console.log("checkpoint");
-	rsmq.sendMessage({qname:config.rsmq.q1name, message: actions},function(err, resp){
+	rsmq.sendMessage({qname:config.q1name, message: actions},function(err, resp){
 		console.log(err);
 	    if (resp) {
 	        console.log("Message sent. ID:", resp);

@@ -1,22 +1,13 @@
 /**
  * Created by Samuel on 1/10/2016.
  */
-var config = require("./config");
+var config = require("../config");
 
 //mongodb integration
 var mongoClient = require('mongodb').MongoClient;
 
-//Express Module for routing, handle front-end http request
-var express = require('express');
-var app = express();
-
-//body parser (req.body)
-var bodyParser = require('body-parser');
-app.use(bodyParser.json());
-
 //Include redis modules
-RedisSMQ = require("rsmq");
-rsmq = new RedisSMQ({host: config.rsmq.IP, port: config.rsmq.port, ns: config.rsmq.ns});
+var rsmq = config.rsmq;
 
 
 function insertToDB(entry) {
@@ -83,11 +74,11 @@ rsmq.createQueue({qname: config.rsmq.q2name}, function (err, resp) {
 });
 */
 
-rsmq.receiveMessage({qname: config.rsmq.q2name}, function (err, resp) {
+rsmq.receiveMessage({qname: config.q2name}, function (err, resp) {
     if (!err) {
         console.log("Message received.", resp);
         insertToDB(resp);
-        rsmq.deleteMessage({qname: config.rsmq.q2name, id: resp.id}, function (err, resp) {
+        rsmq.deleteMessage({qname: config.q2name, id: resp.id}, function (err, resp) {
             if (resp === 1) {
                 console.log("Message" + resp.id + "deleted.");
             }
