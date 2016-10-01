@@ -51,8 +51,8 @@ var master = function() {
       console.log(res);
       //strategy goes here
       var actions = {
-        symbol: "0388",
-        side: "buy",
+        symbol: "0001",
+        side: "sell",
         qty: 1,
         order_type: "market",
         exchange: 1
