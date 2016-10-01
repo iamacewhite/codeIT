@@ -21,5 +21,28 @@
 <h1>You said: {{ data.text }}</h1>
 
 
+
+<script src="https://www.gstatic.com/firebasejs/3.4.1/firebase.js"></script>
+<script>
+    // Initialize Firebase
+    var config = {
+        apiKey: "AIzaSyCQBdQ6CbmWSc1Xm1HNp78FGy6ZCm0JmVY",
+        authDomain: "codeit-suisse-team-ace.firebaseapp.com",
+        databaseURL: "https://codeit-suisse-team-ace.firebaseio.com",
+        storageBucket: "codeit-suisse-team-ace.appspot.com",
+        messagingSenderId: "976285187688"
+    };
+    firebase.initializeApp(config);
+    var transactionsRef = firebase.database().ref('server/testing/transactions');
+
+    function display (snapshot) {
+        console.log(snapshot);
+    }
+    transactionsRef.on('child_added', display);
+
+    firebase.database().ref('server/testing/transactions').once('child_added').then(function(snapshot) {
+        console.log(snapshot.val());
+    });
+</script>
 </body>
 </html>
