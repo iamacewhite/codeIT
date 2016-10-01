@@ -2,6 +2,8 @@ var request = require('request');
 var async = require('async');
 var config = require('../config');
 var rsmq = config.rsmq;
+var delta = 0.1;  //can be put into config
+var quantity = 10; //can be put into config
 
 var master = function() {
   function action(actions) {
@@ -16,7 +18,44 @@ var master = function() {
       }
     });
   }
-  var res = [];
+  function strategy(res){
+    var minAsk, maxBid, buyIn, sellOut;
+    for (var i=0; i<5; i++){ //for each stock
+      minAsk = Number.MAX_VALUE; maxBid = 0; buyIn = 0; sellOut = 0;
+      for (var j=0; j<3; j++){
+        if (minAsk > res[j][i].ask) {
+          minAsk = res[j][i].ask;
+          buyIn = j;
+        }
+        if (maxBid < res[j][i].bid) {
+          maxBid = res[j][i].bid;
+          sellOut = j;
+        }
+      }
+      if (minAsk + delta <= maxBid){
+        var buyaction = {
+          symbol: res[buyIn][i].symbol,
+          side: "buy",
+          qty: quantity,
+          order_type: "limit",
+          price: minAsk + delta * 0.1;
+          exchange: buyIn;
+        };
+        action(JSON.stringify(buyaction));
+        var sellaction = {
+          symbol: res[sellOut][i].symbol,
+          side: "sell",
+          qty: quantity,
+          order_type: "limit",
+          price: maxBid - delta * 0.1;
+          exchange: sellOut;
+        };
+        action(JSON.stringify(sellaction));
+      }
+    }
+  }
+
+
   async.parallel([
       function(callback) {
         request({
@@ -47,17 +86,16 @@ var master = function() {
       }
     ],
     function(err, result) {
-      res = result;
-      console.log(res);
+      console.log(result);
       //strategy goes here
-      var actions = {
-        symbol: "0001",
-        side: "sell",
-        qty: 1,
-        order_type: "market",
-        exchange: 1
-      };
-      action(JSON.stringify(actions));
+      // var actions = {
+      //   symbol: "0001",
+      //   side: "sell",
+      //   qty: 1,
+      //   order_type: "market",
+      //   exchange: 1
+      // };
+      strategy(result);
     });
 }
 // setInterval(function() {
