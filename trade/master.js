@@ -41,7 +41,7 @@ var master = function() {
           price: minAsk + delta * 0.1,
           exchange: buyIn
         };
-        
+
         var sellaction = {
           symbol: res[sellOut][i].symbol,
           side: "sell",
@@ -50,7 +50,7 @@ var master = function() {
           price: maxBid - delta * 0.1,
           exchange: sellOut
         };
-        actions = [JSON.stringify(buyaction), JSON.stringify(sellaction)];
+        actions = JSON.stringify({buyaction: buyaction, sellaction: sellaction});
         action(actions);
       }
     }
