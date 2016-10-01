@@ -23,14 +23,14 @@ if (cluster.isMaster) {
   });
   setInterval(function() {
     master();
-  }, 100)
+  }, config.master_frequency)
 }
 
 else if (cluster.worker.id == 1) {
   console.log("I am mongo worker " + cluster.worker.id);
   setInterval(function() {
     mongo();
-  }, 100)
+  }, config.worker_frequency)
 }
 
 
@@ -38,7 +38,7 @@ else {
   console.log("I am slave worker " + cluster.worker.id);
   setInterval(function() {
     worker();
-  }, 100)
+  }, config.worker_frequency)
   // worker.on( "message", function( msg, next, id ){
   //   // process your message
   //   console.log("Message id : " + id);

@@ -13,5 +13,7 @@
    },
    rsmq: rsmq,
    q1name: "trade",
-   q2name: "db"
+   q2name: "db",
+   master_frequency: 10,
+   worker_frequency: 100
  };
