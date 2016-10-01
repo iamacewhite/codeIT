@@ -6,6 +6,5 @@ node_js:
   - "6.1.0"
 deploy:
   provider: heroku
-  api_key:
-    secure: "4298ad5a-8bd9-478a-bd91-db267dad46dfY"
+  api_key: "4298ad5a-8bd9-478a-bd91-db267dad46dfY"
   app: codeit-ace
