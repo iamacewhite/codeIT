@@ -23,7 +23,9 @@
     "firebase": "^3.4.1",
     "forever": "~0.15.1",
     "jade": "^1.11.0",
-    "rsmq": "^0.7.1"
+    "request": "^2.75.0",
+    "rsmq": "^0.7.1",
+    "tape": "^4.6.2"
   },
   "devDependencies": {
     "babel-eslint": "~6.1.0",
