@@ -5,6 +5,7 @@
 
 module.exports = {
   db: 'mongodb://localhost/your_project_development',
+  token: "ub3xoKYYnv5007VCzJV_HA",
   facebook: {
     clientID: 'APP_ID',
     clientSecret: 'SECRET',

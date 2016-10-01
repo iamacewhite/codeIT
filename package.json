@@ -1,11 +1,7 @@
 {
-  "name": "node-express-mongoose",
-  "description": "A boilerplate application for express mongoose",
+  "name": "codeIT",
+  "description": "",
   "version": "1.0.0",
-  "author": {
-    "name": "Madhusudhan Srinivasa",
-    "email": "me@madhums.me"
-  },
   "engines": {
     "node": ">=6.x"
   },
@@ -50,10 +46,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/madhums/node-express-mongoose.git"
+    "url": "git@github.com:iamacewhite/codeIT.git"
   },
   "keywords": [
-    "mvc",
-    "boilerplate"
+    "codeIT"
   ]
 }

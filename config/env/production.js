@@ -4,7 +4,8 @@
  */
 
 module.exports = {
-  db: 'mongodb://localhost/your_project_production',
+  db: 'mongodb://localhost/teamAce',
+  token: "ub3xoKYYnv5007VCzJV_HA",
   facebook: {
     clientID: 'APP_ID',
     clientSecret: 'SECRET',
