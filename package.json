@@ -12,8 +12,10 @@
     "evil": "./node_modules/.bin/cross-env NODE_ENV=development ./node_modules/.bin/nodemon evil_trade/clustering.js"
   },
   "dependencies": {
+    "angular-chart.js": "^1.0.3",
     "async": "^2.0.1",
     "body-parser": "1.15.2",
+    "chart.js": "^2.3.0",
     "compression": "~1.6.2",
     "cookie-parser": "~1.4.1",
     "cross-env": "~3.0.0",
