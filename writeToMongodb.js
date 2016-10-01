@@ -47,7 +47,7 @@ rsmq.createQueue({qname:config.rsmq.q2name}, function (err, resp) {
     }
 });
 
-rsmq.sendMessage({qname: config.rsmq.q2name, message:{
+rsmq.sendMessage({qname: config.rsmq.q2name, message:JSON.stringify({
     "symbol": "0001",
     "side": "sell",
     "qty": 1,
@@ -55,7 +55,7 @@ rsmq.sendMessage({qname: config.rsmq.q2name, message:{
     "price": 200,
     "team_uid": "eETKmZ1JvPC2wM_UsA8sHw",
     "exchange_id": 1
-}}, function (err, resp) {
+})}, function (err, resp) {
     if (resp) {
         console.log("Message sent. ID:", resp);
     }
@@ -83,8 +83,8 @@ rsmq.receiveMessage({qname:config.rsmq.q2name}, function (err, resp) {
 });
 
 //RESTful API to let front-end query me
-app.post('/queryFromDB', function (req, res){
-    res.status('200').send({"message":"result will be unvieled later"});
+app.post('/queryFromDB', function (req, res) {
+    res.status('200').send({"message": "result will be unvieled later"});
 });
 
 app.listen(3000, function () {
