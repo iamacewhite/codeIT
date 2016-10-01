@@ -1,5 +1,6 @@
 var config = require("../config");
 var request = require('request');
+var delta = 0.1;
 var del_worker = function() {
 
   var rsmq = config.rsmq;
@@ -46,6 +47,7 @@ var del_worker = function() {
             request(options, function(error, response, body) {
               if (!error && response.statusCode == 200) {
                 console.log("delete sell order success");
+                obj.action.price = obj.action.price - delta;
                 rsmq.sendMessage({
                   qname: config.q1name,
                   message: JSON.stringify(obj.action)
