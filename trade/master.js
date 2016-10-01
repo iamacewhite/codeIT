@@ -7,14 +7,14 @@ var quantity = 10; //can be put into config
 
 var master = function() {
   function action(actions) {
-    console.log("checkpoint");
+    //console.log("checkpoint");
     rsmq.sendMessage({
       qname: config.q1name,
       message: actions
     }, function(err, resp) {
-      console.log(err);
+      //console.log(err);
       if (resp) {
-        console.log("Message sent. ID:", resp);
+        //console.log("Message sent. ID:", resp);
       }
     });
   }
@@ -38,8 +38,8 @@ var master = function() {
           side: "buy",
           qty: quantity,
           order_type: "limit",
-          price: minAsk + delta * 0.1;
-          exchange: buyIn;
+          price: minAsk + delta * 0.1,
+          exchange: buyIn
         };
         action(JSON.stringify(buyaction));
         var sellaction = {
@@ -47,8 +47,8 @@ var master = function() {
           side: "sell",
           qty: quantity,
           order_type: "limit",
-          price: maxBid - delta * 0.1;
-          exchange: sellOut;
+          price: maxBid - delta * 0.1,
+          exchange: sellOut
         };
         action(JSON.stringify(sellaction));
       }
@@ -86,7 +86,7 @@ var master = function() {
       }
     ],
     function(err, result) {
-      console.log(result);
+      ////console.log(result);
       //strategy goes here
       // var actions = {
       //   symbol: "0001",

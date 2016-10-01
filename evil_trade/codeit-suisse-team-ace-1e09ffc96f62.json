@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "codeit-suisse-team-ace",
+  "private_key_id": "1e09ffc96f62bf43797c201243f20f2ea9ddd6c4",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDEO587Jp2FKW/J\nJrHj8jpKmlAbshvijCKoiliMpWCh17j4SOWW1wAJnwpOXQEB9TQxImonowoTig3y\nXJydfhm1VpPYLXXaqG2zMFz7+Euyom1H3OHKskKri12L4Y1LPe1AaTL5oB8UA3dI\nWJeMpy6sWbDymb39MnTm7DX60d1AuOPyQkmokuZYpbCS/APFdHqiC27EO615LRSx\nsoeKKZLkSvVdMixqWchCkCa0Gl1Xa4XVU/h1oWJu5CXuoeUeCB3GsrH9m03noWby\nEw5//Qa2+tHi92LwL5lbjCSVw+2PpU69D2dpdqcHFwRQJygIfDYHr975kqvhJNu7\n4kzYm/oTAgMBAAECggEABUjpx+kJUv3DsfIl1lK+uSWgxK4uTBKkGE/phJgrmxA5\nPg6QiFhv+tJar7OXhFr7NduMalbcvZv5Ni7CVQeBX73eK3NF+kaQ9cN2rZ6JQ11W\nfhn3xsK4QvB064B+kqkvS43JvqlOTPau7rbcFgCmpCOiPVZgpIIIXfO8nG2sfMKx\n4L+2D7Mz3C24A9OFAeAyTvhie8KZ15IJnU5kfn9CF6StF5IsI/JdQnyT0xPg6w22\nsYM3BxLnJS0YNDxVN4FNEY1NNilxD/iTCG6E9iXEZUhnFh3EQceSrJspz6VzXxBP\nrvJxTEW6jAoZ5aJI8vKEnPH7jOcRr/OrMqB97TWT6QKBgQDt+tqR6JeB7o+zerEe\nWKh0adE1+/hjyLxSc/8oEVPZY2fwcK3ruRf8leoWpQC1Ylvjn/sLJqNyI8c9FtVB\nHzaVVc2jI0CBQTIEeH0r3r4Vxaz0rnH/p/KtvCb+XOytVvXxsDiONheraMLqVtHS\nkvGjRJTK513C/QzeutfX9Gs7fQKBgQDTF4TmGphkW+7Mklc/uqe8qK4LggzPP51n\nr0SW5O1tFJLZYBO92MfI8LJ9wtnWhpeTPHe+ILvEeqbvUm1tVn58R1vh0pKbtgHg\nhBfubTcHtP7oTFRPL+U/uKf0EKBG9ryZWbGJd/jmL5EsbsqWsc+tYfxnDVSWphvh\n+7gjIXhgzwKBgHGbTXhWJu26KxOtQJySCmj4kw1Iaj2IeI6MHYTNMNAYamgYAo8D\nX3YPQx7oSjxM5jz2BGxAV8qHVffNzKQ3+GC2A2Mb0xFhRDVqJ6cnwGq4YWa1WGqJ\njIpvxdWsGrhtSR/F1lndbNNBQbuJEsWJrJ0agkWSyenpz5kMbToEzqQpAoGBAMU2\nd+cyeaVpblSZdAIKNKPBQ7lkqusFF93ClWYUQu1iB0AmzsrTOPO2TEvKOxJ9dCcO\nmyB6HHKX1FZKwAkigdFCKcl0nZv0ExTa1DDgwETnCC+nAC1rJda+gcs3rUYfRlxO\nu9sext7nGc5VQ9g+DzSBEvqELb8BOZOLRKEtp/VpAoGBAMpoHCH8aJ0FQFfgMB/4\n/TSLySekIyzNS6itLv8Go63FWozrWZna2yoi8yaH5x2LA3bD5a28pSnHyCcDvKFb\nd1pny6iqOAo0++bSbHUmoDWK76eDpBGMuBwWq4HjGBWmunoHon+S8B53GKqrE4/5\n8LN0fkApGjzVqCGeBbLL9oJB\n-----END PRIVATE KEY-----\n",
+  "client_email": "nodejs-driver@codeit-suisse-team-ace.iam.gserviceaccount.com",
+  "client_id": "105243340755380170892",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://accounts.google.com/o/oauth2/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/nodejs-driver%40codeit-suisse-team-ace.iam.gserviceaccount.com"
+}
