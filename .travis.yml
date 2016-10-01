@@ -1,3 +1,4 @@
+sudo: required
 services:
   - mongodb
 language: node_js

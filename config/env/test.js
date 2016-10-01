@@ -7,13 +7,14 @@
 
  module.exports = {
    db: 'mongodb://localhost/teamAce',
-   token: "ub3xoKYYnv5007VCzJV_HA",
+   token: "h5ybTkZn-UFosdVdMTznEw",
    mongo: {
      uri: "mongodb://localhost:27017/teamAce"
    },
    rsmq: rsmq,
    q1name: "trade",
    q2name: "db",
-   master_frequency: 10,
+   q3name: "del",
+   master_frequency: 100,
    worker_frequency: 100
  };

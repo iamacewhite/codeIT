@@ -3,7 +3,7 @@ var async = require('async');
 var config = require('../config');
 var rsmq = config.rsmq;
 var delta = 0.1;  //can be put into config
-var quantity = 10; //can be put into config
+var quantity = 50; //can be put into config
 
 var master = function() {
   function action(actions) {
@@ -14,7 +14,7 @@ var master = function() {
     }, function(err, resp) {
       //console.log(err);
       if (resp) {
-        //console.log("Message sent. ID:", resp);
+        // console.log("Message sent to trade. ID:", resp);
       }
     });
   }
@@ -86,7 +86,6 @@ var master = function() {
                 return;
               }
             }
-            }
           });
       },
       function(callback) {
@@ -101,7 +100,6 @@ var master = function() {
               } catch(err){
                 return;
               }
-            }
             }
           });
       }
