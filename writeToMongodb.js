@@ -37,19 +37,19 @@ function insertToDB(entry) {
 }
 
 /*
-function queryFromMongodb(criteria) {
-    mongoClient.connect(config.mongo.uri, function (err, db) {
-        if(!err){
+ function queryFromMongodb(criteria) {
+ mongoClient.connect(config.mongo.uri, function (err, db) {
+ if(!err){
 
-        }
-    });
-}
-*/
+ }
+ });
+ }
+ */
 
-
+/*
 rsmq.createQueue({qname: config.rsmq.q2name}, function (err, resp) {
-    if (!err){
-        console.log("Queue "+ resp + " created.");
+    if (!err) {
+        console.log("Queue " + resp + " created.");
         rsmq.sendMessage({
             qname: config.rsmq.q2name, message: JSON.stringify({
                 "symbol": "0001",
@@ -59,14 +59,15 @@ rsmq.createQueue({qname: config.rsmq.q2name}, function (err, resp) {
                 "price": 200,
                 "team_uid": "eETKmZ1JvPC2wM_UsA8sHw",
                 "exchange_id": 1
-            })},function(err,resp){
-            if(!err){
+            })
+        }, function (err, resp) {
+            if (!err) {
                 console.log("Message sent. ID:", resp);
-                rsmq.receiveMessage({qname: config.rsmq.q2name},function(err,resp){
-                    if(!err) {
+                rsmq.receiveMessage({qname: config.rsmq.q2name}, function (err, resp) {
+                    if (!err) {
                         console.log("Message received.", resp);
                         insertToDB(resp);
-                        rsmq.deleteMessage({qname:config.rsmq.q2name, id:resp.id},function(err,resp){
+                        rsmq.deleteMessage({qname: config.rsmq.q2name, id: resp.id}, function (err, resp) {
                             if (resp === 1) {
                                 console.log("Message" + resp.id + "deleted.");
                             }
@@ -80,7 +81,22 @@ rsmq.createQueue({qname: config.rsmq.q2name}, function (err, resp) {
         });
     }
 });
+*/
 
+rsmq.receiveMessage({qname: config.rsmq.q2name}, function (err, resp) {
+    if (!err) {
+        console.log("Message received.", resp);
+        insertToDB(resp);
+        rsmq.deleteMessage({qname: config.rsmq.q2name, id: resp.id}, function (err, resp) {
+            if (resp === 1) {
+                console.log("Message" + resp.id + "deleted.");
+            }
+            else {
+                console.log("Message not found.")
+            }
+        });
+    }
+});
 
 
 //RESTful API to let front-end query me
