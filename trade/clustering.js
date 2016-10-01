@@ -1,7 +1,4 @@
 var cluster = require('cluster');
-var RSMQWorker = require( "rsmq-worker" );
-var worker = new RSMQWorker( "myqueue" );
-var cluster = require('cluster');
 var numCPUs = require('os').cpus().length;
 var config = require("../config");
 var master = require("./master");
