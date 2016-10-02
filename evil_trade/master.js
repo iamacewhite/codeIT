@@ -4,7 +4,7 @@ var config = require('../config');
 var rsmq = config.rsmq;
 var amt = 4;
 
-var master = function() {
+var master = function(bidId, askId) {
   // function action(actions) {
   //   //console.log("checkpoint");
   //   rsmq.sendMessage({
@@ -17,12 +17,7 @@ var master = function() {
   //     }
   //   });
   // }
-  var bidId = [{},{},{}];
-  var askId = [{},{},{}];
-  for (var j=0; j<3; ++j){
-    bidId[j] = {"0001": null, "0005": null, "0388": null, "0386":null, "3988":null};
-    askId[j] = {"0001": null, "0005": null, "0388": null, "0386":null, "3988":null};
-  }
+
 
   for (var i=0; i<3; ++i){//for each stock
     for (var key in bidId[i]){
