@@ -40,17 +40,17 @@ app.controller("tradingDisplayController", ["$scope", "$firebaseArray","$interva
         }, true);
 
 
-        var itv = $interval($http({
-            method: 'GET',
-            url: 'http://cis2016-dashboard.herokuapp.com/api/teams',
-            headers: {"Host":"cis2016-dashboard.herokuapp.com",    "cache-control": "no-cache",
-                "postman-token": "1b57b4ca-ce0f-7290-8a96-d6f47d34850d"}
-        }).then(function successCallback(response) {
-            console.log(response);
-        }, function errorCallback(response) {
-            // called asynchronously if an error occurs
-            // or server returns response with an error status.
-        }), 3000);
+        // var itv = $interval($http({
+        //     method: 'GET',
+        //     url: 'http://cis2016-dashboard.herokuapp.com/api/teams',
+        //     headers: {"Host":"cis2016-dashboard.herokuapp.com",    "cache-control": "no-cache",
+        //         "postman-token": "1b57b4ca-ce0f-7290-8a96-d6f47d34850d"}
+        // }).then(function successCallback(response) {
+        //     console.log(response);
+        // }, function errorCallback(response) {
+        //     // called asynchronously if an error occurs
+        //     // or server returns response with an error status.
+        // }), 3000);
 
     }
 ]);
@@ -71,23 +71,23 @@ app.controller("BarCtrl", ["$scope","$interval","$http",function ($scope,$interv
 //     $scope.data[0][0]++;
         
 //   },3000);
-    var itv = $interval(
-        $http({
-            method: 'GET',
-            url: 'http://localhost/getTeamInfo',
-        }).then(function successCallback(response) {
-            obj=JSON.parse(reponse.body);
-            $scope.data = [ [object["0001"],object["0005"],object["0386"],object["0388"],object["3988"]],
-                            [object["0001_reserved"],object["0005_reserved"],object["0386_reserved"],object["0388_reserved"],object["3988_reserved"]]];
-        }, function errorCallback(response) {
-            // called asynchronously if an error occurs
-            // or server returns response with an error status.
-        })
-        , 3000);
+    // var itv = $interval(
+    //     $http({
+    //         method: 'GET',
+    //         url: 'http://localhost/getTeamInfo',
+    //     }).then(function successCallback(response) {
+    //         obj=JSON.parse(reponse.body);
+    //         $scope.data = [ [object["0001"],object["0005"],object["0386"],object["0388"],object["3988"]],
+    //                         [object["0001_reserved"],object["0005_reserved"],object["0386_reserved"],object["0388_reserved"],object["3988_reserved"]]];
+    //     }, function errorCallback(response) {
+    //         // called asynchronously if an error occurs
+    //         // or server returns response with an error status.
+    //     })
+    //     , 3000);
 
 }]);
 
-app.controller("DoughnutCtrl", function ($scope) {
+app.controller("DoughnutCtrl", ["$scope","$interval","$http",function ($scope,$interval,$http) {
   $scope.labels = ["Holdings", "Cash"];
   $scope.data = [300, 500];
 //   setInterval(function(){
@@ -100,14 +100,15 @@ app.controller("DoughnutCtrl", function ($scope) {
             method: 'GET',
             url: 'http://localhost:3000/getTeamInfo',
         }).then(function successCallback(response) {
-            obj=response;
-            $scope.data = [ response.holdings,response.cash ];
+            console.log(response.data);
+            obj=response.data;
+            $scope.data = [ obj.holdings,obj.cash ];
         }, function errorCallback(response) {
             // called asynchronously if an error occurs
             // or server returns response with an error status.
         })
         , 3000);
-});
+}]);
 
 
 
