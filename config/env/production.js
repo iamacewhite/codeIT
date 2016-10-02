@@ -7,7 +7,7 @@
 
  module.exports = {
    db: 'mongodb://localhost/teamAce',
-   token: "KRqQUneWyzHPCM4yzFeesw",
+   token: "YDL9VUwCvT8CDhnGR7tMUw",
    mongo: {
      uri: "mongodb://localhost:27017/teamAce"
    },
@@ -15,6 +15,7 @@
    q1name: "trade",
    q2name: "db",
    q3name: "del",
-   master_frequency: 100,
-   worker_frequency: 100
+   master_frequency: 10,
+   worker_frequency: 10,
+   log_level: 'ERROR'
  };

@@ -14,9 +14,9 @@ if (cluster.isMaster) {
 
   cluster.on('exit', function(worker, code, signal) {
   });
-  while(true) {
+  setInterval(function() {
     master();
-  }
+  }, config.master_frequency)
 }
 
 else if (cluster.isWorker) {
