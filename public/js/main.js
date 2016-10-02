@@ -21,7 +21,7 @@ app.controller("tradingDisplayController", ["$scope", "$firebaseArray","$interva
 
                 var date = new Date($scope.filteredMessages[9 - i].fr);
                 var hours = String(date.getHours());
-                console.log(hours);
+                // console.log(hours);
                 if (hours.length === 1) {
                     hours = '0' + hours;
                 }
@@ -71,14 +71,16 @@ app.controller("BarCtrl", ["$scope","$interval","$http",function ($scope,$interv
 //     $scope.data[0][0]++;
         
 //   },3000);
-    var itv = $interval(
+    $scope.itv = $interval(
         $http({
             method: 'GET',
             url: 'http://localhost:3000/getStocksInfo',
         }).then(function successCallback(response) {
-            obj=JSON.parse(reponse.data);
+            obj=response.data;
+            console.log(obj);
             $scope.data = [ [obj["0001"].actualHold,obj["0005"].actualHold,obj["0386"].actualHold,obj["0388"].actualHold,obj["3988"].actualHold],
                             [obj["0001"].reserved,obj["0005"].reserved,obj["0386"].reserved,obj["0388"].reserved,obj["3988"].reserved]];
+            console.log($scope.data);
         }, function errorCallback(response) {
             // called asynchronously if an error occurs
             // or server returns response with an error status.
@@ -95,12 +97,12 @@ app.controller("DoughnutCtrl", ["$scope","$interval","$http",function ($scope,$i
 //     $scope.data[0]+=100;
         
 //   },3000);
-    var itv = $interval(
+    $scope.itv = $interval(
         $http({
             method: 'GET',
             url: 'http://localhost:3000/getTeamInfo',
         }).then(function successCallback(response) {
-            console.log(response.data);
+            // console.log(response.data);
             obj=response.data;
             $scope.data = [ obj.holdings,obj.cash ];
         }, function errorCallback(response) {
