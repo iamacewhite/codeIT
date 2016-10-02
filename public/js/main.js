@@ -2,7 +2,7 @@
  * Created by Samuel on 1/10/2016.
  */
 
-var app = angular.module("tradingDisplayApp", ["firebase"]);
+var app = angular.module("tradingDisplayApp", ["firebase","chart.js"]);
 
 
 app.controller("tradingDisplayController", ["$scope", "$firebaseArray","$interval","$http",
@@ -55,17 +55,43 @@ app.controller("tradingDisplayController", ["$scope", "$firebaseArray","$interva
     }
 ]);
 
-angular.module("app", ["chart.js"]).controller("BarCtrl", function ($scope) {
-  $scope.labels = ['0005', '0386', '0388', '3988'];
+
+
+app.controller("BarCtrl", ["$scope","$interval","$http",function ($scope,$interval,$http) {
+  $scope.labels = ['0001','0005', '0386', '0388', '3988'];
   $scope.series = ['Holding', 'Reserved'];
 
   $scope.data = [
-    [65, 59, 80, 81],
-    [28, 48, 40, 19]
+    [5, 65, 59, 80, 81],
+    [6, 28, 48, 40, 19]
   ];
 
-  
-});
+//   setInterval(function(){
+//       request(
+//         {
+//               uri:"http://cis2016-teamtracker.herokuapp.com/api/teams/ub3xoKYYnv5007VCzJV_HA",
+//               method:"GET"
+//         }, 
+//         function(error, response, body){
+//             if (!error && response.statusCode == 200){
+//                 obj=JSON.parse(body);
+//                 $scope.data = [ [object["0001"],object["0005"],object["0386"],object["0388"],object["3988"]],
+//                                 [object["0001_reserved"],object["0005_reserved"],object["0386_reserved"],object["0388_reserved"],object["3988_reserved"]]];
+//             }
+//   },3000);
+    // var itv = $interval($http({
+    //         method: 'GET',
+    //         url: 'http://localhost',
+    //     }).then(function successCallback(response) {
+    //         obj=JSON.parse(body);
+    //         $scope.data = [ [object["0001"],object["0005"],object["0386"],object["0388"],object["3988"]],
+    //                         [object["0001_reserved"],object["0005_reserved"],object["0386_reserved"],object["0388_reserved"],object["3988_reserved"]]];
+    //     }, function errorCallback(response) {
+    //         // called asynchronously if an error occurs
+    //         // or server returns response with an error status.
+    //     }), 3000);
+
+}]);
 
 
 
