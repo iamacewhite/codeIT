@@ -2,10 +2,11 @@
  * Created by Samuel on 2/10/2016.
  */
 var request = require('request');
+var config = require("../../config");
 exports.getstock = function (req, res) {
     var message = {};
     request({
-        uri: "http://cis2016-teamtracker.herokuapp.com/api/teams/KRqQUneWyzHPCM4yzFeesw",
+        uri: "http://cis2016-teamtracker.herokuapp.com/api/teams/" + config.token,
         method: "GET"
     }, function (error, response, body) {
         if (!error) {
