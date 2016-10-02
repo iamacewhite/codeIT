@@ -40,17 +40,17 @@ app.controller("tradingDisplayController", ["$scope", "$firebaseArray","$interva
         }, true);
 
 
-        var itv = $interval($http({
-            method: 'GET',
-            url: 'http://cis2016-dashboard.herokuapp.com/api/teams',
-            headers: {"Host":"cis2016-dashboard.herokuapp.com",    "cache-control": "no-cache",
-                "postman-token": "1b57b4ca-ce0f-7290-8a96-d6f47d34850d"}
-        }).then(function successCallback(response) {
-            console.log(response);
-        }, function errorCallback(response) {
-            // called asynchronously if an error occurs
-            // or server returns response with an error status.
-        }), 3000);
+        // var itv = $interval($http({
+        //     method: 'GET',
+        //     url: 'http://cis2016-dashboard.herokuapp.com/api/teams',
+        //     headers: {"Host":"cis2016-dashboard.herokuapp.com",    "cache-control": "no-cache",
+        //         "postman-token": "1b57b4ca-ce0f-7290-8a96-d6f47d34850d"}
+        // }).then(function successCallback(response) {
+        //     console.log(response);
+        // }, function errorCallback(response) {
+        //     // called asynchronously if an error occurs
+        //     // or server returns response with an error status.
+        // }), 3000);
 
     }
 ]);
@@ -67,30 +67,47 @@ app.controller("BarCtrl", ["$scope","$interval","$http",function ($scope,$interv
   ];
 
 //   setInterval(function(){
-//       request(
-//         {
-//               uri:"http://cis2016-teamtracker.herokuapp.com/api/teams/ub3xoKYYnv5007VCzJV_HA",
-//               method:"GET"
-//         }, 
-//         function(error, response, body){
-//             if (!error && response.statusCode == 200){
-//                 obj=JSON.parse(body);
-//                 $scope.data = [ [object["0001"],object["0005"],object["0386"],object["0388"],object["3988"]],
-//                                 [object["0001_reserved"],object["0005_reserved"],object["0386_reserved"],object["0388_reserved"],object["3988_reserved"]]];
-//             }
-//   },3000);
-    // var itv = $interval($http({
-    //         method: 'GET',
-    //         url: 'http://localhost',
-    //     }).then(function successCallback(response) {
-    //         obj=JSON.parse(body);
-    //         $scope.data = [ [object["0001"],object["0005"],object["0386"],object["0388"],object["3988"]],
-    //                         [object["0001_reserved"],object["0005_reserved"],object["0386_reserved"],object["0388_reserved"],object["3988_reserved"]]];
-    //     }, function errorCallback(response) {
-    //         // called asynchronously if an error occurs
-    //         // or server returns response with an error status.
-    //     }), 3000);
 
+//     $scope.data[0][0]++;
+        
+//   },3000);
+    var itv = $interval(
+        $http({
+            method: 'GET',
+            url: 'http://localhost:3000/getStocksInfo',
+        }).then(function successCallback(response) {
+            obj=JSON.parse(reponse.data);
+            $scope.data = [ [obj["0001"].actualHold,obj["0005"].actualHold,obj["0386"].actualHold,obj["0388"].actualHold,obj["3988"].actualHold],
+                            [obj["0001"].reserved,obj["0005"].reserved,obj["0386"].reserved,obj["0388"].reserved,obj["3988"].reserved]];
+        }, function errorCallback(response) {
+            // called asynchronously if an error occurs
+            // or server returns response with an error status.
+        })
+        , 3000);
+
+}]);
+
+app.controller("DoughnutCtrl", ["$scope","$interval","$http",function ($scope,$interval,$http) {
+  $scope.labels = ["Holdings", "Cash"];
+  $scope.data = [300, 500];
+//   setInterval(function(){
+
+//     $scope.data[0]+=100;
+        
+//   },3000);
+    var itv = $interval(
+        $http({
+            method: 'GET',
+            url: 'http://localhost:3000/getTeamInfo',
+        }).then(function successCallback(response) {
+            console.log(response.data);
+            obj=response.data;
+            $scope.data = [ obj.holdings,obj.cash ];
+        }, function errorCallback(response) {
+            // called asynchronously if an error occurs
+            // or server returns response with an error status.
+        })
+        , 3000);
 }]);
 
 
