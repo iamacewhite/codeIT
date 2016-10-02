@@ -16,12 +16,12 @@ if (cluster.isMaster) {
   });
   setInterval(function() {
     master();
-  }, config.master_frequency)
+  }, 1000)
 }
 
 else if (cluster.isWorker) {
   // console.log("I am mongo worker " + cluster.worker.id);
   setInterval(function() {
     mongo();
-  }, config.worker_frequency)
+  }, 1000)
 }
