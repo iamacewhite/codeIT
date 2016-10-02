@@ -71,7 +71,7 @@ app.controller("BarCtrl", ["$scope","$interval","$http",function ($scope,$interv
 //     $scope.data[0][0]++;
         
 //   },3000);
-    var itv = $interval(
+    $scope.itv = $interval(
         $http({
             method: 'GET',
             url: 'http://localhost:3000/getStocksInfo',
@@ -97,7 +97,7 @@ app.controller("DoughnutCtrl", ["$scope","$interval","$http",function ($scope,$i
 //     $scope.data[0]+=100;
         
 //   },3000);
-    var itv = $interval(
+    $scope.itv = $interval(
         $http({
             method: 'GET',
             url: 'http://localhost:3000/getTeamInfo',
