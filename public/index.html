@@ -22,11 +22,12 @@
 
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
+    
 </head>
-<body>
+<body ng-app="tradingDisplayApp">
 <script src="js/main.js"></script>
 
-<!--<div class="container-fluid" ng-app="tradingDisplayApp" ng-controller="tradingDisplayController">
+<div class="container"  ng-controller="tradingDisplayController">
     <table class="highlight">
         <thead>
         <tr>
@@ -51,7 +52,7 @@
         </tr>
         </tbody>
     </table>
-</div>-->
+</div>
 
 
 
@@ -59,7 +60,7 @@
 <p>{{filteredMessages}}</p>
 <h3>{{recentTrans}}</h3>
 -->
-<div ng-app="app" ng-controller="BarCtrl">
+<div class="container" ng-controller="BarCtrl">
     <canvas id="bar" class="chart chart-bar" chart-data="data" chart-labels="labels"  chart-series="series">
     </canvas>
 </div>
