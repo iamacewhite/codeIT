@@ -1,8 +1,28 @@
 var config = require("../config");
 
 //mongodb integration
-var mongoClient = require('mongodb').MongoClient;
+//var mongoClient = require('mongodb').MongoClient;
+
+//Firebase
+var firebase = require("firebase");
+var path = require("path");
+firebase.initializeApp({
+    serviceAccount: path.resolve(__dirname, './codeit-suisse-team-ace-1e09ffc96f62.json'),
+    databaseURL: "https://codeit-suisse-team-ace.firebaseio.com/"
+});
+
+var db = firebase.database();
+var ref = db.ref("server/testing");
+var usersRef = ref.child("transactionHistory");
+
+
 var insertToDB = function(entry) {
+    if(entry.message){
+        entry.message = JSON.parse(entry.message);
+        usersRef.push().set(entry);
+    }
+
+/*
   mongoClient.connect(config.mongo.uri, function(err, db) {
     if (err) {
       console.log('an error');
@@ -22,5 +42,9 @@ var insertToDB = function(entry) {
       // });
     }
   });
-}
+  */
+};
+
+// insertToDB({"time":147262494723131,"message":{"symbol":"0001","price":33.45}});
+
 module.exports = insertToDB;

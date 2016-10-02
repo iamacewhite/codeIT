@@ -1,21 +1,10 @@
 'use strict';
 
-/*
- * nodejs-express-mongoose
- * Copyright(c) 2015 Madhusudhan Srinivasa <madhums8@gmail.com>
- * MIT Licensed
- */
-
-/**
- * Module dependencies
- */
-
-
 const join = require('path').join;
 const express = require('express');
 const config = require('./config');
 
-const port = process.env.PORT || 80;
+const port = process.env.PORT || 3000;
 
 const app = express();
 

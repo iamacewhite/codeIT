@@ -1,3 +1,0 @@
-function evil_strat() {
-  
-}
