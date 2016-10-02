@@ -67,31 +67,47 @@ app.controller("BarCtrl", ["$scope","$interval","$http",function ($scope,$interv
   ];
 
 //   setInterval(function(){
-//       request(
-//         {
-//               uri:"http://cis2016-teamtracker.herokuapp.com/api/teams/ub3xoKYYnv5007VCzJV_HA",
-//               method:"GET"
-//         }, 
-//         function(error, response, body){
-//             if (!error && response.statusCode == 200){
-//                 obj=JSON.parse(body);
-//                 $scope.data = [ [object["0001"],object["0005"],object["0386"],object["0388"],object["3988"]],
-//                                 [object["0001_reserved"],object["0005_reserved"],object["0386_reserved"],object["0388_reserved"],object["3988_reserved"]]];
-//             }
+
+//     $scope.data[0][0]++;
+        
 //   },3000);
-    // var itv = $interval($http({
-    //         method: 'GET',
-    //         url: 'http://localhost',
-    //     }).then(function successCallback(response) {
-    //         obj=JSON.parse(body);
-    //         $scope.data = [ [object["0001"],object["0005"],object["0386"],object["0388"],object["3988"]],
-    //                         [object["0001_reserved"],object["0005_reserved"],object["0386_reserved"],object["0388_reserved"],object["3988_reserved"]]];
-    //     }, function errorCallback(response) {
-    //         // called asynchronously if an error occurs
-    //         // or server returns response with an error status.
-    //     }), 3000);
+    var itv = $interval(
+        $http({
+            method: 'GET',
+            url: 'http://localhost/getTeamInfo',
+        }).then(function successCallback(response) {
+            obj=JSON.parse(reponse.body);
+            $scope.data = [ [object["0001"],object["0005"],object["0386"],object["0388"],object["3988"]],
+                            [object["0001_reserved"],object["0005_reserved"],object["0386_reserved"],object["0388_reserved"],object["3988_reserved"]]];
+        }, function errorCallback(response) {
+            // called asynchronously if an error occurs
+            // or server returns response with an error status.
+        })
+        , 3000);
 
 }]);
+
+app.controller("DoughnutCtrl", function ($scope) {
+  $scope.labels = ["Holdings", "Cash"];
+  $scope.data = [300, 500];
+//   setInterval(function(){
+
+//     $scope.data[0]+=100;
+        
+//   },3000);
+    var itv = $interval(
+        $http({
+            method: 'GET',
+            url: 'http://localhost:3000/getTeamInfo',
+        }).then(function successCallback(response) {
+            obj=response;
+            $scope.data = [ response.holdings,response.cash ];
+        }, function errorCallback(response) {
+            // called asynchronously if an error occurs
+            // or server returns response with an error status.
+        })
+        , 3000);
+});
 
 
 
