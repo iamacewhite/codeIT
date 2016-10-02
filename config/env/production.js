@@ -7,7 +7,7 @@
 
  module.exports = {
    db: 'mongodb://localhost/teamAce',
-   token: "ub3xoKYYnv5007VCzJV_HA",
+   token: "KRqQUneWyzHPCM4yzFeesw",
    mongo: {
      uri: "mongodb://localhost:27017/teamAce"
    },
