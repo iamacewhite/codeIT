@@ -6,6 +6,7 @@
 
 const home = require('../app/controllers/home');
 const queryFromDB = require('../app/controllers/queryFromDB');
+const getTeamInfo = require('../app/controllers/getTeamInfo')
 /**
  * Expose
  */
@@ -15,6 +16,7 @@ module.exports = function (app, passport) {
   app.get('/', home.index);
   //RESTful API to let front-end query me
   app.post('/queryFromDB', queryFromDB.db);
+  app.get('/getTeamInfo', getTeamInfo.getinfo);
   /**
    * Error handling
    */
