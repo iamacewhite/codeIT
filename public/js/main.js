@@ -7,7 +7,8 @@ var app = angular.module("tradingDisplayApp", ["firebase","chart.js"]);
 
 app.controller("tradingDisplayController", ["$scope", "$firebaseArray","$interval","$http",
     function ($scope, $firebaseArray,$interval,$http) {
-        var messagesRef = new Firebase("https://codeit-suisse-team-ace.firebaseio.com/server/testing/transactionHistory");
+        //Remark: firebase details removed after the competition ended, in order to make the code open-source
+        var messagesRef = new Firebase("");
         // download the data from a Firebase reference into a (pseudo read-only) array
         // all server changes are applied in realtime
         $scope.messages = $firebaseArray(messagesRef);

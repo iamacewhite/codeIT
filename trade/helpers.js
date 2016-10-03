@@ -7,8 +7,9 @@ var config = require("../config");
 var firebase = require("firebase");
 var path = require("path");
 firebase.initializeApp({
-    serviceAccount: path.resolve(__dirname, './codeit-suisse-team-ace-1e09ffc96f62.json'),
-    databaseURL: "https://codeit-suisse-team-ace.firebaseio.com/"
+    serviceAccount: path.resolve(__dirname, ''),
+    //REMARK: Firebase details deleted in order to make this project open-source
+    databaseURL: ""
 });
 
 var db = firebase.database();
