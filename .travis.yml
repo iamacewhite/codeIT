@@ -8,3 +8,5 @@ deploy:
   provider: heroku
   api_key: "4298ad5a-8bd9-478a-bd91-db267dad46df"
   app: codeit-ace
+after_sccuess:
+  bash <(curl -s https://codecov.io/bash) -t 791bb9bd-2493-4f00-ae2b-1fb6b7be8aa9
