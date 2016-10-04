@@ -1,3 +1,4 @@
+// initialize queues on machine
 var config = require("../config");
 config.rsmq.createQueue({qname:config.q1name}, function (err, resp) {
         if (resp===1) {

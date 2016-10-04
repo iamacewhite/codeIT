@@ -1,3 +1,4 @@
+// this strategy has some problems, needs further improvement
 var cluster = require('cluster');
 var numCPUs = require('os').cpus().length;
 var config = require("../config");
@@ -33,11 +34,11 @@ if (cluster.isMaster) {
   while (true) {
     setTimeout(function() {
       master(bidId, askId);
-    }, 1000)
+    }, 600000)
   }
 } else if (cluster.isWorker) {
   // console.log("I am mongo worker " + cluster.worker.id);
   setInterval(function() {
     mongo();
-  }, 1000)
+  }, 10000)
 }
